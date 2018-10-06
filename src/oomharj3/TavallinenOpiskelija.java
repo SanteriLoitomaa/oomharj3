@@ -6,10 +6,11 @@ public class TavallinenOpiskelija implements Opiskelija {
 	int opNumero;
 	OOMTilanne oomTilanne;
 
-	public TavallinenOpiskelija(String nimi, int opNumero) {
+	public TavallinenOpiskelija(String nimi, int opNumero, boolean hereillä) {
 		this.nimi = nimi;
 		this.opNumero = opNumero;
 		this.oomTilanne = new OOMTilanne();
+		oomTilanne.hereillä = hereillä;
 	}
 
 	/**
@@ -58,6 +59,9 @@ public class TavallinenOpiskelija implements Opiskelija {
 	public void osallistuLuennolle() {
 		oomTilanne.luennolla = true;
 		Maailma.lisääTuskaa(10);
+		if(oomTilanne.hereillä) {
+			Maailma.lisääTuskaa(90);
+		}
 	}
 
 	/**
@@ -88,7 +92,7 @@ public class TavallinenOpiskelija implements Opiskelija {
 	 */
 	@Override
 	public void vastaaKysymykseen(int aikaaLuennonAlusta) {
-		oomTilanne.hereillä = true;
+		herää(aikaaLuennonAlusta);
 		Maailma.lisääTuskaa(90-aikaaLuennonAlusta);
 	}
 }

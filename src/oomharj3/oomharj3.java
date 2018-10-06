@@ -27,14 +27,20 @@ public class oomharj3 {
 	 */
 	public static void main(String[] args) {
 		int vuosi = 2018;
-		int uhriMäärä = 100 + new java.util.Random().nextInt(10 * (vuosi - 2000));
+		int uhriMäärä = 100;
 		long vuoden1Tuska = 0;
 		long vuoden2Tuska = 0;
 		long vuoden3Tuska = 0;
 		long vuoden4Tuska = 0;
 		long vuoden5Tuska = 0;
-		OpiskelijaAllas.hankiOpiskelijat(uhriMäärä);
-		for(int i = 0; i < 5; i++) {
+		boolean tuska = false;
+		for(int i = 0; i < 1; i++) {
+			if(!tuska) {
+				OpiskelijaAllas.hankiOpiskelijat(uhriMäärä, vuosi);
+			}
+			else {
+				OpiskelijaAllas.hankiOpiskelijat(uhriMäärä);
+			}
 			new oomharj3().pidäVuosittainenInstanssi(OpiskelijaAllas.opiskelijat());
 			if(i == 0) {
 				vuoden1Tuska = Maailma.annaTuska();
@@ -48,9 +54,7 @@ public class oomharj3 {
 				vuoden5Tuska = Maailma.annaTuska();
 			}
 			vuosi++;
-			uhriMäärä = 100 + new java.util.Random().nextInt(10 * (vuosi - 2000));
-			OpiskelijaAllas.hankiOpiskelijat(uhriMäärä, vuosi);
-			//OpiskelijaAllas.hankiOpiskelijat(uhriMäärä);
+			uhriMäärä = 100;
 		}
 		System.out.println("Vuoden 1 tuska: " + vuoden1Tuska);
 		System.out.println("Vuoden 2 tuska: " + (vuoden2Tuska - vuoden1Tuska));

@@ -5,7 +5,6 @@ public final class Maailma {
 
 	static void lisääTuskaa(int i) {
 		tuskanMäärä += i;
-		System.out.println("Tuskaa jo " + tuskanMäärä + " yksikköä!");
 	}
 	
 	static long annaTuska() {

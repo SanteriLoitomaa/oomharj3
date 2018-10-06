@@ -78,7 +78,6 @@ public class ValeasuOpiskelija implements Opiskelija {
 	 */
 	@Override
 	public void vastaaKysymykseen(int aikaaLuennonAlusta) {
-		herää(aikaaLuennonAlusta);
 		opiskelija.vastaaKysymykseen(aikaaLuennonAlusta);
 	}
 }

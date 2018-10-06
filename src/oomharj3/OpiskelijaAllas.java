@@ -16,7 +16,7 @@ public class OpiskelijaAllas {
 				uusiAllas[i] = opiskelijat[i];
 			}
 			for(int i = opiskelijat.length; i < uhriMäärä; i++) {
-				uusiAllas[i] = new ValeasuOpiskelija(new TavallinenOpiskelija("Uniikki Lumihiutale", 1234567 + i));
+				uusiAllas[i] = new ValeasuOpiskelija(new TavallinenOpiskelija("Uniikki Lumihiutale", 1234567 + i, false));
 			}
 		}
 		else {
@@ -37,7 +37,7 @@ public class OpiskelijaAllas {
 	public static void hankiOpiskelijat(int uhriMäärä) {
 		Opiskelija[] uusiAllas = new Opiskelija[uhriMäärä];
 		for (int i = 0; i<uhriMäärä; i++)
-		uusiAllas[i] = new TavallinenOpiskelija("Uniikki Lumihiutale", 1234567+i);
+		uusiAllas[i] = new TavallinenOpiskelija("Uniikki Lumihiutale", 1234567+i, true);
 		opiskelijat = uusiAllas;
 	}
 
