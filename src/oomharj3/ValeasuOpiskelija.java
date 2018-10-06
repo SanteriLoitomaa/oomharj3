@@ -2,55 +2,83 @@ package oomharj3;
 
 public class ValeasuOpiskelija implements Opiskelija {
 
-	String nimi;
-	int opiskelijanumero;
-	Opiskelija kohde;
-	OOMTilanne oomTilanne;
+	Opiskelija opiskelija;
 	
-	public ValeasuOpiskelija(String nimi, int opiskelijanumero, Opiskelija kohde) {
-		this.nimi = nimi;
-		this.opiskelijanumero = opiskelijanumero;
-		this.kohde = kohde;
-		oomTilanne = new OOMTilanne();
+	public ValeasuOpiskelija(Opiskelija opiskelija) {
+		this.opiskelija = opiskelija;
 	}
 
+	/**
+	 * @.pre true
+	 * @.post RESULT == (Palauttaa tilanneolion)
+	 */
 	@Override
 	public OOMTilanne annaOOMTilanne() {
-		return oomTilanne;
+		return opiskelija.annaOOMTilanne();
 	}
 
+	/**
+	 * Asettaa opiskelijan nimen ja op. numeron
+	 * 
+	 * @.pre nimi != null && opNumero>0
+	 * @.post (nimi & op.numero asetettu)
+	 **/
 	@Override
-	public void asetaNimiJaOpNumero(String nimi, int opiskelijanumero) {
-		this.nimi = nimi;
-		this.opiskelijanumero = opiskelijanumero;
+	public void asetaNimiJaOpNumero(String nimi, int opNumero) {
+		opiskelija.asetaNimiJaOpNumero(nimi, opNumero);
 	}
 
+	/**
+	 * @.pre true
+	 * @.post annaOOMTilanne().ilmoittautunut == true && annaOOMTilanne().hereillä
+	 *        == false && annaOOMTilanne().luennolla == false &&
+	 *        (OLD(annaOOMTilanne().ilmoittautunut) || Maailma.tuskanMäärä ==
+	 *        OLD(Maailma.tuskanMäärä) + 1000)
+	 */
 	@Override
 	public void ilmoittauduOOMKurssille() {
-		oomTilanne.ilmoittautunut = true;
+		opiskelija.ilmoittauduOOMKurssille();
 	}
 
+	/**
+	 * @.pre annaOOMTilanne().ilmoittautunut == true && annaOOMTilanne().hereillä ==
+	 *       false
+	 * @.post Maailma.tuskanMäärä == OLD(Maailma.tuskanMäärä) + 10 &&
+	 *        annaOOMTilanne().luennolla == true
+	 */
 	@Override
 	public void osallistuLuennolle() {
-		oomTilanne.luennolla = true;
+		opiskelija.osallistuLuennolle();
 	}
 
+	/**
+	 * @.pre 0 ≤ aikaaLuennonAlusta < 90
+	 * @.post annaOOMTilanne().hereillä == true
+	 */
 	@Override
 	public void herää(int aikaaLuennonAlusta) {
-		if(kohde.annaOOMTilanne().hereillä) return;
-		else {
-			oomTilanne.hereillä = false;
-			oomTilanne.luennolla = false;
-		}
+		opiskelija.herää(aikaaLuennonAlusta);
 	}
 
+	/**
+	 * @.pre annaOOMTilanne().luennolla == true
+	 * @.post annaOOMTilanne().luennolla == false && annaOOMTilanne().hereillä ==
+	 *        false
+	 */
 	@Override
 	public void poistuLuennolta() {
-		oomTilanne.luennolla = false;
+		opiskelija.poistuLuennolta();
 	}
 
+	/**
+	 * @.pre annaOOMTilanne().ilmoittautunut == true && annaOOMTilanne().hereillä ==
+	 *       true
+	 * @.post Maailma.tuskanMäärä == OLD(tuskanMäärä) + 90 -
+	 *        hereilläAlkaenMinuutista && annaOOMTilanne().hereillä == true
+	 */
 	@Override
 	public void vastaaKysymykseen(int aikaaLuennonAlusta) {
-		kohde.vastaaKysymykseen(aikaaLuennonAlusta);
+		herää(aikaaLuennonAlusta);
+		opiskelija.vastaaKysymykseen(aikaaLuennonAlusta);
 	}
 }

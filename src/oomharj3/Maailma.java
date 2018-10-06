@@ -7,4 +7,8 @@ public final class Maailma {
 		tuskanMäärä += i;
 		System.out.println("Tuskaa jo " + tuskanMäärä + " yksikköä!");
 	}
+	
+	static long annaTuska() {
+		return tuskanMäärä;
+	}
 }
